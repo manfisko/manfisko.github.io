@@ -1,0 +1,91 @@
+body {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  min-height: 100vh;
+  text-align: center;
+  font-family: helvetica;
+  text-transform: uppercase;
+  background-color: black;
+  background-image: url("castle.jpg");
+  background-repeat: no-repeat;
+  color: #a28200;
+}
+
+
+.ost{
+  margin: 0 auto;
+  font-size: 40px;
+  color: black;
+  margin-bottom: 200px;
+}
+
+.countdown {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  width: 75%;
+  max-width: 20rem;
+  margin: 0 auto;
+  margin-top: 180px;
+  margin-left:460px;
+}
+
+.countdown__item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-flex: 0;
+      -ms-flex: 0 1 auto;
+          flex: 0 1 auto;
+  min-width: 31%;
+  margin-bottom: 1rem;
+}
+
+.countdown__item--large {
+  -webkit-box-flex: 1;
+      -ms-flex: auto;
+          flex: auto;
+  width: 100%;
+  font-size: 2.75em;
+}
+
+.not{
+   margin: 0 auto;
+   text-transform: none;
+   font-size: 30px;
+
+}
+
+.countdown__timer {
+  padding: .25em;
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 3px;
+  font-weight: bold;
+  font-size: 2em;
+}
+
+.countdown__label {
+  font-size: 1em;
+  padding-top: .40em;
+}
+.countdown__item--large .countdown__label:before, .countdown__item--large .countdown__label:after {
+  content: '';
+  display: block;
+  height: 1px;
+  background-image: -webkit-gradient(linear, left top, right top, from(transparent), color-stop(rgba(0, 0, 0, 0.4)), to(transparent));
+  background-image: linear-gradient(left, transparent, rgba(0, 0, 0, 0.4), transparent);
+}
