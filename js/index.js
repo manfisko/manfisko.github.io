@@ -1,80 +1,207 @@
-// ========================== //
-// 2017 Countdown JS
-// ========================== //
+$(document).ready(function() {
 
-var countdown = new Date("March 8, 2018");
+  //кнопка сабмит
+  //$("#nonogramSubmit").on("click", function(e) {
+   $("button").on("click", function(e) {  
 
-function getRemainingTime(endtime) {
-  var milliseconds = Date.parse(endtime) - Date.parse(new Date());
-  var seconds = Math.floor(milliseconds / 1000 % 60);
-  var minutes = Math.floor(milliseconds / 1000 / 60 % 60);
-  var hours = Math.floor(milliseconds / (1000 * 60 * 60) % 24);
-  var days = Math.floor(milliseconds / (1000 * 60 * 60 * 24));
 
-  return {
-    'total': milliseconds,
-    'seconds': seconds,
-    'minutes': minutes,
-    'hours': hours,
-    'days': days
-  };
-}
 
-function initClock(id, endtime) {
-  var counter = document.getElementById(id);
-  var daysItem = counter.querySelector('.js-countdown-days');
-  var hoursItem = counter.querySelector('.js-countdown-hours');
-  var minutesItem = counter.querySelector('.js-countdown-minutes');
-  var secondsItem = counter.querySelector('.js-countdown-seconds');
+   e.preventDefault();
+   //   var nonogramClues = [[[1,1],[1,1,1,1],[1,2,1],[1,1],[1,2,2,1],[1,1],[1,2,1],[1,1],[6],[]],[[5],[1,1],[1,1,1],[1,1,1],[1,1,1],[1,1,1],[1,1,1],[1,1,1],[1,1],[5]]];
+   // var nonogramClues = $("#enteredNonogram").val();
 
-  function updateClock() {
-    var time = getRemainingTime(endtime);
+   var idOfButton = $(this).attr("id");
 
-    daysItem.innerHTML = time.days;
-    hoursItem.innerHTML = ('0' + time.hours).slice(-2);
-    minutesItem.innerHTML = ('0' + time.minutes).slice(-2);
-    secondsItem.innerHTML = ('0' + time.seconds).slice(-2);
+   // [[[1,1],[2],[4],[2]],[[2],[4],[2],[1,1]]]
 
-    if (time.total <= 0) {
-      clearInterval(timeinterval);
+
+
+    if (idOfButton=='nonogramSubmit'){console.log('YES');} 
+    else {return;};
+
+
+
+
+
+    noooo = '[[[5],[5],[5],[5],[5],[5],[5],[5],[5],[5]],[[10],[10],[10],[10],[10],[],[],[],[],[]]]';
+    var nonogramClues = JSON.parse(noooo);
+    var xClues = nonogramClues[0];
+    var yClues = nonogramClues[1];
+    var width = yClues.length;
+    var height = xClues.length;
+    var output = "<tr class='fieldRow'><td class='corner'></td>";
+    yClues.forEach(function(array){
+      output += "<th class='columnClue' valign='bottom'>";
+      for (i = 0; i < array.length; i++) {
+        output += array[i] + "</br>";
+      }
+      output += "</th>";
+    })
+    output += "</tr>";
+    xClues.forEach(function(array){
+      output += "<tr class='fieldRow'><th class='rowClue'>";
+      for (var i=0; i < array.length; i++) {
+        output += array[i] + " ";
+      }
+      output += "</th>";
+      for (var i=0; i < width; i++){
+        output += "<td class='fieldData0'></td>";
+      }
+      output += "</tr>";
+    })
+    
+    console.log(output+'hhjhjh');
+    $("#playField").html(output);
+    
+  })
+
+
+  //анализ ячеек игры
+  $("#playField").on("click", "td", function() {
+    if ($(this).hasClass("fieldData0")) {
+      $(this).removeClass("fieldData0");
+      $(this).addClass("fieldData1");
+    } else if ($(this).hasClass("fieldData1")) {
+      $(this).removeClass("fieldData1");
+      $(this).addClass("fieldData0");
+    };
+ //   $("#playField .tableRow")
+});
+  
+  
+
+  //анализ ячеек старта
+  $("#field").on("click", "td", function() {
+    if ($(this).hasClass("fieldData0")) {
+      $(this).removeClass("fieldData0");
+      $(this).addClass("fieldData1");
+    } else if ($(this).hasClass("fieldData1")) {
+      $(this).removeClass("fieldData1");
+      $(this).addClass("fieldData0");
+      return;
+    };
+  });
+  
+
+  //создание стартоваой таблицы
+  $("#startMake").on("click", function(e) {
+    e.preventDefault();
+    var returnval = "";
+    var width = $("#fieldWidth").val();
+    var height = $("#fieldHeight").val();
+    for (i = 0; i < height; i++) {
+      returnval += "<tr id='fieldRow" + i + "' class='fieldRow'>";
+      for (j = 0; j < width; j++) {
+        returnval += "<td id='fieldDatax" + j + "y" + i + "' class=\"fieldData0\"></td>";
+      };
+      returnval += "</tr>";
     }
+    console.log(returnval+'rrrrrr');
+    $("#field").html(returnval);
+  });
+  
+
+
+
+  //кнопка генерации
+  $("#nonogramGenerate").on("click", function(e) {
+    var nonogramArray = [];
+    $(".fieldRow").each(function() {
+      var tempArray = [];
+      var rowQuery = "#" + $(this).attr("id") + " td";
+      $(rowQuery).each(function() {
+        var value = $(this).attr("class").substring(9, 10);
+        tempArray.push(parseInt(value));
+      })
+      nonogramArray.push(tempArray);
+    })
+    console.log(nonogramArray);
+    var output = stringify(griddlify(nonogramArray));
+    console.log(griddlify(nonogramArray));
+    $("#madeNonogram").html(output);
+  })
+})
+
+var stringify = function(object) {
+  var output = '<p>[[';
+  for (i = 0; i < object.rows.length; i++) {
+    output += "[" + object.xClues[i] + "]";
+    if (i < object.rows.length - 1) {
+      output += ","
+    }
+  };
+  output += "],[";
+  for (i = 0; i < object.columns.length; i++) {
+    output += "[" + object.yClues[i] + "]";
+    if (i < object.columns.length - 1) {
+      output += ","
+    }
+  };
+  output += "]]</p>"
+  return output;
+};
+
+var griddlify = function(array) {
+
+  var rowArray = [];
+  var colArray = [];
+  var numColumns = array[0].length;
+  var columns = [];
+  for (i = 0; i < numColumns; i++) {
+    columns.push([])
   }
 
-  updateClock();
-  var timeinterval = setInterval(updateClock, 1000);
+  array.forEach(function(subArray) {
+    var counter = 0;
+    var tempArray = [];
+    for (i = 0; i < subArray.length; i++) {
+      columns[i].push(subArray[i]);
+      if (subArray[i] === 1) {
+        counter++
+      }
+      if (subArray[i] === 1 && subArray[i + 1] !== 1) {
+        tempArray.push(counter);
+        counter = 0
+      }
+    }
+    console.log(tempArray);
+    rowArray.push(tempArray);
+  });
+
+  columns.forEach(function(subArray) {
+    var counter = 0;
+    var tempArray = [];
+    for (i = 0; i < subArray.length; i++) {
+      if (subArray[i] === 1) {
+        counter++
+      }
+      if (subArray[i] === 1 && subArray[i + 1] !== 1) {
+        tempArray.push(counter);
+        counter = 0
+      }
+    }
+    colArray.push(tempArray);
+  });
+  var nonogram = {
+    "columns": columns,
+    "rows": array,
+    "xClues": rowArray,
+    "yClues": colArray
+  };
+
+  return nonogram;
+
+};
+
+var binaryGenerator = function(tableRow) {
+  var tempArray = [];
+  var rowQuery = "#" + $(this).attr("id") + " td";
+  $(rowQuery).each(function() {
+    var value = $(this).attr("class").substring(9, 10);
+    tempArray.push(parseInt(value));
+  })
+  nonogramArray.push(tempArray);
 }
 
-initClock('js-countdown', countdown);
-
-// ========================== //
-// 2013 Countdown JS
-// ========================== //
-
-// function counter() {
-//   var today = new Date(); //variable contains current date and time
-
-//   var days = calcDays(today); //calculate the time left until set date below
-//   document.countDown.daysLeft.value = Math.floor(days); // displays days rounded to the next lowest integer
-
-//   var hours = (days - Math.floor(days)) * 24; //calculate the hours left in the current day
-//   document.countDown.hrLeft.value = Math.floor(hours); // display hours rounded to the next lowest integer
-
-//   var minutes = (hours - Math.floor(hours)) * 60; // calculate the minutes left in the current hour
-//   document.countDown.minLeft.value = Math.floor(minutes); // display minutes rounded to the next lowest integer
-
-//   var seconds = (minutes - Math.floor(minutes)) * 60; //calculate the seconds left in the current minute
-//   document.countDown.secLeft.value = Math.floor(seconds); // display seconds rounded to the next lowest integer
-// }
-
-// function calcDays(currentDate) {
-//   //create a date object for date of graduation
-//   //calculate the difference between currentDate and set date
-//   setDate = new Date("May 6, 2013");
-//   currentTime = currentDate.getFullYear() + 1;
-//   setDate.setFullYear(currentTime);
-
-//   days = (setDate - currentDate) / (1000 * 60 * 60 * 24);
-//   return days;
-// }
-
-// setInterval('counter()', 1000)
+//* sample nonogram
+//* [[1,1,1,1],[1,1,0,1],[0,0,1,0],[0,1,1,1]]
