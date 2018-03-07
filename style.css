@@ -1,6 +1,17 @@
+body{
+  background-color: black; 
+  background-image: url("bg4.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center; 
+  background-size: cover; 
+}
+
+
+
 .colbg{
 	background-color: darkgreen;
 	padding: 5px;
 	margin: 3px;
-	border: black;
+	border-radius: 3px;
 }
