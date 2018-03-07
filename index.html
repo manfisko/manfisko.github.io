@@ -3,67 +3,26 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Nonogram</title>
+  <title>Detect user agent, browser, os, screen resolution and other debug info</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
-  <link rel="stylesheet" href="css/style.css">
+  
+      <link rel="stylesheet" href="css/style.css">
 
   
 </head>
 
 <body>
 
-<div class="flx2">
-  <div></div>
-</div>
+  <h2>Detect user agent, browser, os, screen resolution and other debug info</h2>
+<p><i>An easy method using UA-Parser (https://github.com/faisalman/ua-parser-js) and vanilla JavaScript variables to detect user info for debugging, such as browser version, os, screen resolution, device type etc.</i></p>
+<div id="debug-container"></div>
+<button class="refresh-button" onclick="getDebugInfo()">Refresh </button>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/UAParser.js/0.7.12/ua-parser.min.js'></script>
 
-
-  <div class="container">
-    <form id="fr">
-      <div class="row opaBl">
-        <button class="col btn btn-info" id="nonogramSubmit">Сrossword 1</button>
-        <button class="col btn btn-info">Сrossword 2</button>
-        <button class="col btn btn-info">Сrossword 3</button>
-        <button class="col btn btn-info">Сrossword 4</button>
-      </div> 
-    </form>
-  </div>
   
-<!--
-  <div class="container">
-    <div class="row">
-      <div class="col-4 mx-auto">
-        <table id="playField"></table>
-      </div>
-    </div>  
-  </div>
--->
 
-<div class="flx">
-  <table style="border: 5px rgba(221,221,221,0.1) solid;background-color: rgba(221,221,221,0.5); " id="playField"></table>
-</div>
-
-
-
-
-<div class="flx">
-  <div style="background-color: #dddddd; border-radius: 4px; display: none;">Далеко-далеко за словесными горами в стране, гласных и согласных живут рыбные тексты. Дорогу буквенных ipsum lorem силуэт решила рот страну имени сбить родного, жизни, переулка за ему она снова города журчит лучше!</div>
-</div>
-
-
-
-<!-- Optional JavaScript -->
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-
-
-
-<script  src="js/index.js"></script>
+    <script  src="js/index.js"></script>
 
 
 
