@@ -2,7 +2,7 @@ body{
   background-color: black; 
   background-image: url("bg4.jpg");
   background-repeat: no-repeat;
-  background-attachment: fixed;
+  background-attachment: fixed, fixed;
   background-position: center; 
   background-size: cover; 
 }
