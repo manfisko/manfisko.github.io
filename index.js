@@ -57,16 +57,22 @@ $(document).ready(function() {
 
 
   //анализ ячеек игры
-  $("#playField").on("click", "td", function() {
+  $("#playField").on("mouseenter", "td", function() {
     if ($(this).hasClass("fieldData0")) {
       $(this).removeClass("fieldData0");
       $(this).addClass("fieldData1");
     } else if ($(this).hasClass("fieldData1")) {
       $(this).removeClass("fieldData1");
+      $(this).addClass("fieldData2");
+    }
+    else if ($(this).hasClass("fieldData2")) {
+      $(this).removeClass("fieldData2");
       $(this).addClass("fieldData0");
-    };
+    }
+    ;
  //   $("#playField .tableRow")
 });
+  });
   
   
 
