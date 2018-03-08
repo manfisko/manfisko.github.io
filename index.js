@@ -57,7 +57,7 @@ $(document).ready(function() {
 
 
   //анализ ячеек игры
-  $("#playField").on("mouseenter", "td", function() {
+  $("#playField").on("click", "td", function() {
     if ($(this).hasClass("fieldData0")) {
       $(this).removeClass("fieldData0");
       $(this).addClass("fieldData1");
@@ -72,7 +72,7 @@ $(document).ready(function() {
     ;
  //   $("#playField .tableRow")
 });
-  });
+
   
   
 
